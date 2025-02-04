@@ -1,0 +1,315 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-black;
+    cursor: default;
+  }
+
+  @property --binary-opacity {
+    syntax: '<number>';
+    initial-value: 0;
+    inherits: false;
+  }
+}
+
+@layer utilities {
+  /* Add new nav-link styles before other utility classes */
+  .nav-link {
+    @apply relative text-white/80;
+    will-change: color, text-shadow;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    transition: 
+      color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      text-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation-fill-mode: forwards;
+  }
+
+  .nav-link::before {
+    content: '';
+    @apply absolute inset-0 opacity-0;
+    background: radial-gradient(circle at center,
+      rgba(255, 165, 0, 0.15) 0%,
+      rgba(255, 165, 0, 0.1) 20%,
+      transparent 70%
+    );
+    will-change: opacity;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    pointer-events: none;
+  }
+
+  .nav-link:hover, .nav-link.hover-active {
+    @apply text-orange-500;
+    text-shadow: 0 0 8px rgba(255, 165, 0, 0.4);
+  }
+
+  .nav-link:hover::before, .nav-link.hover-active::before {
+    opacity: 1;
+  }
+
+  .backdrop-blur-sm {
+    backdrop-filter: blur(8px);
+  }
+
+  .grid-background {
+    @apply fixed inset-0 w-full min-h-screen pointer-events-none;
+    background-image: 
+      linear-gradient(rgba(255, 165, 0, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 165, 0, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-attachment: fixed;
+    z-index: 0;
+  }
+
+  .header-grid, .footer-grid {
+    @apply absolute inset-0 pointer-events-none;
+    background-image: 
+      linear-gradient(rgba(255, 165, 0, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 165, 0, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: -1;
+  }
+
+  /* Enhanced Matrix Button Styles */
+  .matrix-button {
+    @apply relative overflow-hidden border border-orange-500/30 bg-transparent;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    will-change: transform, box-shadow, border-color, background-color;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    transition: 
+      border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    animation-fill-mode: forwards;
+  }
+
+  .matrix-button::before {
+    content: '';
+    @apply absolute inset-0 opacity-0;
+    background: radial-gradient(circle at center,
+      rgba(255, 165, 0, 0.15) 0%,
+      rgba(255, 165, 0, 0.1) 20%,
+      transparent 70%
+    );
+    will-change: opacity;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    pointer-events: none;
+  }
+
+  .matrix-button:hover, .matrix-button.hover-active {
+    @apply bg-orange-500/10 border-orange-500/50;
+    transform: scale(1.02) translateZ(0);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 20px rgba(255, 165, 0, 0.2);
+  }
+
+  .matrix-button:hover::before, .matrix-button.hover-active::before {
+    opacity: 1;
+  }
+
+  /* Social Icon Button Styles */
+  .social-icon-button {
+    @apply relative overflow-hidden border border-orange-500/30 bg-transparent;
+    will-change: border-color, background-color;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    transition: 
+      border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation-fill-mode: forwards;
+  }
+
+  .social-icon-button::before {
+    content: '';
+    @apply absolute inset-0 opacity-0;
+    background: radial-gradient(circle at center,
+      rgba(255, 165, 0, 0.15) 0%,
+      rgba(255, 165, 0, 0.1) 20%,
+      transparent 70%
+    );
+    will-change: opacity;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    pointer-events: none;
+  }
+
+  .social-icon-button:hover, .social-icon-button.hover-active {
+    @apply bg-orange-500/10 border-orange-500/50;
+    box-shadow: 0 0 20px rgba(255, 165, 0, 0.2);
+  }
+
+  .social-icon-button:hover::before, .social-icon-button.hover-active::before {
+    opacity: 1;
+  }
+
+  /* Enhanced Feature Card Styles */
+  .feature-card {
+    @apply transition-all duration-300;
+    min-height: 200px;
+    will-change: transform, box-shadow;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    transition: 
+      border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .feature-card::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 rounded-xl;
+    background: radial-gradient(circle at center,
+      rgba(255, 165, 0, 0.15) 0%,
+      rgba(255, 165, 0, 0.1) 20%,
+      transparent 70%
+    );
+    will-change: opacity;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    z-index: -1;
+  }
+
+  .feature-card:hover {
+    transform: scale(1.02) translateY(-4px) translateZ(0);
+    box-shadow: 0 0 30px rgba(255, 165, 0, 0.1);
+  }
+
+  .feature-card:hover::before {
+    opacity: 1;
+  }
+
+  /* Enhanced Learn More Link Styles */
+  .learn-more {
+    @apply text-white/80;
+    will-change: transform, color;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    transition: 
+      color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .learn-more::before {
+    content: '';
+    @apply absolute inset-0 opacity-0;
+    background: radial-gradient(circle at center,
+      rgba(255, 165, 0, 0.15) 0%,
+      rgba(255, 165, 0, 0.1) 20%,
+      transparent 70%
+    );
+    will-change: opacity;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  .learn-more.hover-active {
+    @apply text-orange-500;
+    transform: translateX(4px) translateZ(0);
+  }
+
+  .learn-more:hover::before {
+    opacity: 1;
+  }
+
+  .cursor-glow {
+    @apply fixed pointer-events-none z-[9999];
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, 
+      rgba(255, 165, 0, 0.15) 0%,
+      rgba(255, 165, 0, 0.1) 20%,
+      transparent 70%
+    );
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translate(-50%, -50%) translateZ(0);
+    mix-blend-mode: screen;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .logo-pulse {
+    animation: logoPulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    will-change: transform, filter;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  @keyframes logoPulse {
+    0%, 100% {
+      filter: drop-shadow(0 0 0 rgba(255, 165, 0, 0));
+      transform: scale(1) translateZ(0);
+    }
+    50% {
+      filter: 
+        drop-shadow(0 0 15px rgba(255, 165, 0, 0.6))
+        drop-shadow(0 0 10px rgba(255, 165, 0, 0.4))
+        drop-shadow(0 0 5px rgba(255, 165, 0, 0.2));
+      transform: scale(1.05) translateZ(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Footer Link Styles */
+  .footer-link {
+    @apply relative text-gray-400;
+    will-change: color, text-shadow;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    transition: 
+      color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      text-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation-fill-mode: forwards;
+  }
+
+  .footer-link::before {
+    content: '';
+    @apply absolute inset-0 opacity-0;
+    background: radial-gradient(circle at center,
+      rgba(255, 165, 0, 0.15) 0%,
+      rgba(255, 165, 0, 0.1) 20%,
+      transparent 70%
+    );
+    will-change: opacity;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    pointer-events: none;
+  }
+
+  .footer-link:hover, .footer-link.hover-active {
+    @apply text-orange-500;
+    text-shadow: 0 0 8px rgba(255, 165, 0, 0.4);
+  }
+
+  .footer-link:hover::before, .footer-link.hover-active::before {
+    opacity: 1;
+  }
+}
